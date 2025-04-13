@@ -8,23 +8,30 @@
             height: 100%;
             margin: 0;
             font-family: sans-serif;
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
+
+        .wrapper {
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
         .container {
             text-align: center;
             padding: 20px;
-            width: 100%;
         }
+
         h2 {
-            font-size: 2.5em; /* 폰트 크기 크게 */
+            font-size: 2.5em;
             margin-bottom: 30px;
         }
+
         button {
             font-size: 1.2em;
             padding: 15px 30px;
         }
+
         img {
             margin-top: 40px;
             max-width: 45%;
@@ -33,18 +40,20 @@
     </style>
 </head>
 <body>
-    <div class="container">
-        {% if 'checked_' in session and session['checked_' + request.args.get('id', '')] %}
-            <h2 style="color:red;">❌ 이미 입장하셨습니다.</h2>
-        {% elif request.method == "POST" %}
-            <h2 style="color:green;">✅ 확인되었습니다.</h2>
-        {% else %}
-            <h2>입장하시겠습니까?</h2>
-            <form method="POST">
-                <button type="submit">입장</button>
-            </form>
-        {% endif %}
-        <img src="{{ url_for('static', filename='KMA+vision3.png') }}" alt="KMA 이미지">
+    <div class="wrapper">
+        <div class="container">
+            {% if 'checked_' in session and session['checked_' + request.args.get('id', '')] %}
+                <h2 style="color:red;">❌ 이미 입장하셨습니다.</h2>
+            {% elif request.method == "POST" %}
+                <h2 style="color:green;">✅ 확인되었습니다.</h2>
+            {% else %}
+                <h2>입장하시겠습니까?</h2>
+                <form method="POST">
+                    <button type="submit">입장</button>
+                </form>
+            {% endif %}
+            <img src="{{ url_for('static', filename='KMA+vision3.png') }}" alt="KMA 이미지">
+        </div>
     </div>
 </body>
 </html>
