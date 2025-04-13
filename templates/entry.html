@@ -3,29 +3,21 @@
 <head>
     <meta charset="utf-8">
     <title>입장 확인</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <style>
         html, body {
+            height: 100%;
             margin: 0;
-            padding: 0;
-            font-family: sans-serif;
-            background: white;
         }
         body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-        }
-        .main-container {
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            min-height: 100svh; /* Safari 모바일 대응 */
-            padding: 30px 20px;
+            min-height: 100vh;
+            font-family: sans-serif;
             text-align: center;
-            font-size: 1.8em;
+            padding: 20px;
+            font-size: 1.5em;  /* 글자 크기 적당히 */
         }
         h2 {
             font-size: 2em;
@@ -43,18 +35,16 @@
     </style>
 </head>
 <body>
-    <div class="main-container">
-        {% if 'checked_' in session and session['checked_' + request.args.get('id', '')] %}
-            <h2 style="color:red;">❌ 이미 입장하셨습니다.</h2>
-        {% elif request.method == "POST" %}
-            <h2 style="color:green;">✅ 확인되었습니다.</h2>
-        {% else %}
-            <h2>입장하시겠습니까?</h2>
-            <form method="POST">
-                <button type="submit">입장</button>
-            </form>
-        {% endif %}
-        <img src="{{ url_for('static', filename='KMA+vision3.png') }}" alt="KMA 이미지">
-    </div>
+    {% if 'checked_' in session and session['checked_' + request.args.get('id', '')] %}
+        <h2 style="color:red;">❌ 이미 입장하셨습니다.</h2>
+    {% elif request.method == "POST" %}
+        <h2 style="color:green;">✅ 확인되었습니다.</h2>
+    {% else %}
+        <h2>입장하시겠습니까?</h2>
+        <form method="POST">
+            <button type="submit">입장</button>
+        </form>
+    {% endif %}
+    <img src="{{ url_for('static', filename='KMA+vision3.png') }}" alt="KMA 이미지">
 </body>
 </html>
