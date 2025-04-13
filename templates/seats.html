@@ -1,0 +1,30 @@
+<!-- templates/seats.html -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>좌석 선택</title>
+    <style>
+        /* 스타일링 코드 */
+    </style>
+</head>
+<body>
+    <h2>좌석을 선택해주세요</h2>
+    <div class="seats" id="seatsContainer">
+        {% for seat in seats %}
+            <div class="seat {% if seat.is_reserved %}reserved{% endif %}" data-seat="{{ seat.number }}">
+                {{ seat.number }}
+            </div>
+        {% endfor %}
+    </div>
+
+    <form method="POST" action="/reserve" id="reserveForm" style="display:none;">
+        <input type="hidden" name="seat_number" id="seatNumber">
+        <button type="submit">예약</button>
+    </form>
+
+    <script>
+        // JavaScript 코드
+    </script>
+</body>
+</html>
