@@ -5,15 +5,21 @@
     <title>입장 확인</title>
     <style>
         body {
+            margin: 0;
+            height: 100vh;
+            font-family: sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            font-size: 2em;
+        }
+        .main-container {
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            font-family: sans-serif;
-            text-align: center;
-            padding: 20px;
-            font-size: 2em; /* 전체 글자 2배 확대 */
+            height: 100%;
         }
         h2 {
             font-size: 2.5em;
@@ -25,23 +31,24 @@
         }
         img {
             margin-top: 40px;
-            max-width: 45%; /* 이미지 크기 절반 */
+            max-width: 45%;
             height: auto;
         }
     </style>
 </head>
 <body>
-    {% if 'checked_' in session and session['checked_' + request.args.get('id', '')] %}
-        <h2 style="color:red;">❌ 이미 입장하셨습니다.</h2>
-    {% elif request.method == "POST" %}
-        <h2 style="color:green;">✅ 확인되었습니다.</h2>
-    {% else %}
-        <h2>입장하시겠습니까?</h2>
-        <form method="POST">
-            <button type="submit">입장</button>
-        </form>
-    {% endif %}
-    <img src="{{ url_for('static', filename='KMA+vision3.png') }}" alt="KMA 이미지">
+    <div class="main-container">
+        {% if 'checked_' in session and session['checked_' + request.args.get('id', '')] %}
+            <h2 style="color:red;">❌ 이미 입장하셨습니다.</h2>
+        {% elif request.method == "POST" %}
+            <h2 style="color:green;">✅ 확인되었습니다.</h2>
+        {% else %}
+            <h2>입장하시겠습니까?</h2>
+            <form method="POST">
+                <button type="submit">입장</button>
+            </form>
+        {% endif %}
+        <img src="{{ url_for('static', filename='KMA+vision3.png') }}" alt="KMA 이미지">
+    </div>
 </body>
 </html>
-
