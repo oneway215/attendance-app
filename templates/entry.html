@@ -16,7 +16,7 @@
             font-size: 2em; /* 전체 글자 2배 확대 */
         }
         h2 {
-            font-size: 2em;
+            font-size: 2.5em;
             margin-bottom: 30px;
         }
         button {
@@ -25,16 +25,22 @@
         }
         img {
             margin-top: 40px;
-            max-width: 90%;
+            max-width: 45%; /* 이미지 크기 절반 */
             height: auto;
         }
     </style>
 </head>
 <body>
-    <h2>입장하시겠습니까?</h2>
-    <form method="POST">
-        <button type="submit">입장</button>
-    </form>
+    {% if 'checked_' in session and session['checked_' + request.args.get('id', '')] %}
+        <h2 style="color:red;">❌ 이미 입장하셨습니다.</h2>
+    {% elif request.method == "POST" %}
+        <h2 style="color:green;">✅ 확인되었습니다.</h2>
+    {% else %}
+        <h2>입장하시겠습니까?</h2>
+        <form method="POST">
+            <button type="submit">입장</button>
+        </form>
+    {% endif %}
     <img src="{{ url_for('static', filename='KMA+vision3.png') }}" alt="KMA 이미지">
 </body>
 </html>
