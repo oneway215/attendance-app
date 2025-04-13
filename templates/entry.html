@@ -1,59 +1,54 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html>
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
     <title>입장 확인</title>
     <style>
         html, body {
             height: 100%;
             margin: 0;
-            font-family: sans-serif;
         }
-
-        .wrapper {
-            height: 100%;
+        body {
             display: flex;
             justify-content: center;
             align-items: center;
-        }
-
-        .container {
+            font-family: sans-serif;
             text-align: center;
             padding: 20px;
         }
-
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
         h2 {
             font-size: 2.5em;
             margin-bottom: 30px;
         }
-
         button {
-            font-size: 1.2em;
+            font-size: 1em;
             padding: 15px 30px;
         }
-
         img {
             margin-top: 40px;
-            max-width: 45%;
+            width: 250px;  /* 적절한 크기로 조절 */
             height: auto;
         }
     </style>
 </head>
 <body>
-    <div class="wrapper">
-        <div class="container">
-            {% if 'checked_' in session and session['checked_' + request.args.get('id', '')] %}
-                <h2 style="color:red;">❌ 이미 입장하셨습니다.</h2>
-            {% elif request.method == "POST" %}
-                <h2 style="color:green;">✅ 확인되었습니다.</h2>
-            {% else %}
-                <h2>입장하시겠습니까?</h2>
-                <form method="POST">
-                    <button type="submit">입장</button>
-                </form>
-            {% endif %}
-            <img src="{{ url_for('static', filename='KMA+vision3.png') }}" alt="KMA 이미지">
-        </div>
+    <div class="container">
+        {% if 'checked_' in session and session['checked_' + request.args.get('id', '')] %}
+            <h2 style="color:red;">❌ 이미 입장하셨습니다.</h2>
+        {% elif request.method == "POST" %}
+            <h2 style="color:green;">✅ 확인되었습니다.</h2>
+        {% else %}
+            <h2>입장하시겠습니까?</h2>
+            <form method="POST">
+                <button type="submit">입장</button>
+            </form>
+        {% endif %}
+        <img src="{{ url_for('static', filename='KMA+vision3.png') }}" alt="KMA 이미지">
     </div>
 </body>
 </html>
