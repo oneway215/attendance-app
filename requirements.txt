@@ -1,4 +1,1 @@
-Flask
-pandas
-openpyxl
-qrcode
+Flask==3.0.0
